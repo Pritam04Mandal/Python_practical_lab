@@ -1,3 +1,7 @@
+import tkinter as tk
+from tkinter import simpledialog as sp
+from tkinter import messagebox as msg
+
 def areaperimeter(a:int,b:int,c:int)->tuple:
     try:
         assert ((a+b>c) or (b+c>a) or (a+c>b))
@@ -5,31 +9,18 @@ def areaperimeter(a:int,b:int,c:int)->tuple:
         perimeter=a+b+c
         return(area,perimeter)
     except AssertionError:
-        print("Triangle is not a valid triangle")
-        
-def areaperimeter(a:float,b:float,c:float)->tuple:
-    try:
-        assert ((a+b>c) or (b+c>a) or (a+c>b))
-        area=a*b*c
-        perimeter=a+b+c
-        return(area,perimeter)
-    except AssertionError:
-        print("Triangle is not a valid triangle")
-
-side1=float(input("Enter side 1: "))
-side2=float(input("Enter side 2: "))
-side3=float(input("Enter side 3: "))
+        msg.showerror("ERROR",message="Triangle is not a valid triangle")
+root=tk.Tk()
+root.title("Printing the AREA and PERIMETER")
+root.geometry("500x500")
+side1=sp.askfloat(parent=root,title="Enter Side",prompt="Enter side 1",initialvalue=0,minvalue=0)
+side2=sp.askfloat(parent=root,title="Enter Side",prompt="Enter side 2",initialvalue=0,minvalue=0)
+side3=sp.askfloat(parent=root,title="Enter Side",prompt="Enter side 3",initialvalue=0,minvalue=0)
+font1=("Arial",15,"bold","italic")
 flag=True
-while(flag):
-    try:
-        assert (int(side1)>0 and int(side2)>0 and int(side3)>0)
-        print("Area, Perimeter")
-        print(areaperimeter(side1,side2,side3))
-        flag=False
-    except AssertionError:
-        print("Sides should be numeric and cannot be negative or zero")
-        print("Enter the side again.......")
-        side1=int(input("Enter side 1: "))
-        side2=int(input("Enter side 2: "))
-        side3=int(input("Enter side 3: "))
-        
+l1=tk.Label(master=root,font=font1,fg="blue",text="(Area, Perimeter)")
+l1.pack()
+l2=tk.Label(master=root,font=font1,fg="red",text=str(areaperimeter(side1,side2,side3)))
+l2.pack()
+flag=False
+root.mainloop()
