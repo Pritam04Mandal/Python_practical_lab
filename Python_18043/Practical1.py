@@ -5,7 +5,8 @@ from tkinter import messagebox as msg
 def areaperimeter(a:int,b:int,c:int)->tuple:
     try:
         assert ((a+b>c) or (b+c>a) or (a+c>b))
-        area=a*b*c
+        s=(a+b+c)/2
+        area=(s*(s-a)*(s-b)*(s-c))**(0.5)
         perimeter=a+b+c
         return(area,perimeter)
     except AssertionError:
